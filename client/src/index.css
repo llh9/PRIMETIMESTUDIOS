@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC&family=Quicksand&display=swap");
+body {
+    background-color: rgba(128, 128, 128, 0.648);
+    background-image: url('./images/COBackground.jpg');
+    background-size: cover;
+}
+
+* {
+    /* font-family: 'Noto Sans JP' !important; */
+    /* font-family: 'Heebo', sans-serif !important; */
+    font-family: "Orbitron", sans-serif !important;
+}
+/* #root{
+    background-image: url('./images/COBackground.jpg'); 
+    background-size: cover;
+} */
