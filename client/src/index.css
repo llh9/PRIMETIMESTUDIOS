@@ -14,3 +14,8 @@ body {
     background-image: url('./images/COBackground.jpg'); 
     background-size: cover;
 } */
+.video-responsive {
+    display: flex;
+    width: inherit;
+    height: inherit;
+}

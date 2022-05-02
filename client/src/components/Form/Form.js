@@ -9,7 +9,7 @@ import { createPost, updatePost } from '../../actions/posts';
 import useStyles from './styles';
 
 const Form = ({ currentId, setCurrentId }) => {
-  const [postData, setPostData] = useState({ title: '', message: '', tags: [], selectedFile: '' });
+  const [postData, setPostData] = useState({ title: '', message: '', tags: [], selectedFile: '', selectedDate: '' });
   const post = useSelector((state) => (currentId ? state.posts.posts.find((message) => message._id === currentId) : null));
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -18,7 +18,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const clear = () => {
     setCurrentId(0);
-    setPostData({ title: '', message: '', tags: [], selectedFile: '' });
+    setPostData({ title: '', message: '', tags: [], selectedFile: '', selectedDate: '' });
   };
 
   useEffect(() => {
@@ -28,9 +28,10 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(postData);
+    setPostData();
     if (currentId === 0) {
-      dispatch(createPost({ ...postData, name: user?.result?.name }, history));
+      dispatch(createPost({ ...postData, name: user?.result?.name},  history));
       clear();
     } else {
       dispatch(updatePost(currentId, { ...postData, name: user?.result?.name }));
@@ -42,7 +43,7 @@ const Form = ({ currentId, setCurrentId }) => {
     return (
       <Paper className={classes.paper} elevation={6}>
         <Typography variant="h6" align="center">
-          Please Sign In to create your own memories and like other's memories.
+          Sign In To Hop In The Requests Line
         </Typography>
       </Paper>
     );
@@ -59,8 +60,20 @@ const Form = ({ currentId, setCurrentId }) => {
   return (
     <Paper className={classes.paper} elevation={6}>
       <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-        <Typography className={classes.heading} variant="h6">{currentId ? `Editing "${post?.title}"` : 'Create a Service Category'}</Typography>
+        <Typography className={classes.heading} variant="h6">{currentId ? `Editing "${post?.title}"` : "We ca' Link"}</Typography>
         <TextField className={classes.themedText} name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
+        <TextField
+          id="datetime-local"
+          name="selectedDate"
+          label="Request Date"
+          type="datetime-local"
+          defaultValue="2017-05-24T10:30"
+          className={classes.themedText}
+          onChange={(e) => setPostData({ ...postData, selectedDate: e.target.value })}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
         <TextField className={classes.themedText} name="message" variant="outlined" label="Message" fullWidth multiline rows={4} value={postData.message} onChange={(e) => setPostData({ ...postData, message: e.target.value })} />
         <div style={{ padding: '5px 0', width: '94%' }}>
           <ChipInput

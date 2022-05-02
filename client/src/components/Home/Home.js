@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grow, Grid, AppBar, TextField, Button, Paper } from '@material-ui/core';
+import { Container, Grow, Grid, AppBar, TextField, Button, Paper, Zoom, FormControlLabel, Switch } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
@@ -7,6 +7,8 @@ import ChipInput from 'material-ui-chip-input';
 import { getPostsBySearch } from '../../actions/posts';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
+import Gallery from '../Gallery/Gallery';
+import YoutubeEmbed from "../../YoutubeEmbed";
 import Pagination from '../Pagination';
 import useStyles from './styles';
 
@@ -25,6 +27,11 @@ const Home = () => {
   const [search, setSearch] = useState('');
   const [tags, setTags] = useState([]);
   const history = useHistory();
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
 
   const searchPost = () => {
     if (search.trim() || tags) {
@@ -48,10 +55,48 @@ const Home = () => {
   return (
     <Grow in>
       <Container maxWidth="xl">
+      
         <Grid container justify="space-between" alignItems="stretch" spacing={3} className={classes.gridContainer}>
           <Grid item xs={12} sm={6} md={9}>
             <Posts setCurrentId={setCurrentId} />
+            <Grid item xs={12} sm={6} md={9}>
+      <FormControlLabel
+        control={<Switch checked={checked} onChange={handleChange} />}
+        label="Show Videos"
+        style={{color: 'white'}}
+      />
+      {(checked) && (
+      <div className={classes.container}>
+      <Zoom in={checked}  style={{ transitionDelay: checked ? '500ms' : '0ms' }}>
+      <Paper elevation={4} className={classes.paper}>
+      <YoutubeEmbed className={classes.paper} embedId="ue6lV09tcBY" overFlow='hidden' position="relative" />
+      </Paper>
+      </Zoom>
+      <Zoom in={checked}  style={{ transitionDelay: checked ? '500ms' : '0ms' }}>
+      <Paper elevation={4} className={classes.paper}>
+      <YoutubeEmbed className={classes.paper} embedId="qG8MGKfjaW4" /> 
+      </Paper>
+      </Zoom>
+      <Zoom in={checked}  style={{ transitionDelay: checked ? '500ms' : '0ms' }}>
+      <Paper elevation={4} className={classes.paper}>
+      <YoutubeEmbed className={classes.paper} embedId="y5Z-SLzYb2M" /> 
+      </Paper>
+      </Zoom>
+      <Zoom in={checked}  style={{ transitionDelay: checked ? '500ms' : '0ms' }}>
+      <Paper elevation={4} className={classes.paper}>
+      <YoutubeEmbed className={classes.paper} embedId="TIotnf1i4q4" /> 
+      </Paper>
+      </Zoom>
+      <Zoom in={checked}  style={{ transitionDelay: checked ? '500ms' : '0ms' }}>
+      <Paper elevation={4} className={classes.paper}>
+      <YoutubeEmbed className={classes.paper} embedId="HOwaStaLpOI" /> 
+      </Paper>
+      </Zoom>
+      </div>
+      )}
+        </Grid>
           </Grid>
+          
           <Grid item xs={12} sm={6} md={3}>
             <AppBar className={classes.appBarSearch} position="static" color="inherit">
               <TextField className={classes.searchText} onKeyDown={handleKeyPress} name="search" variant="outlined" label="Search Services" fullWidth value={search} onChange={(e) => setSearch(e.target.value)} />

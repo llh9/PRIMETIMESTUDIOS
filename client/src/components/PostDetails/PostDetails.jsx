@@ -9,6 +9,7 @@ import CommentSection from './CommentSection';
 import useStyles from './styles';
 
 const Post = () => {
+  const user = JSON.parse(localStorage.getItem('profile'));
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -57,11 +58,16 @@ const Post = () => {
               {` ${post.name}`}
             </Link>
           </Typography>
+          <Divider style={{ margin: '20px 0' }} />
+          <Typography variant="body2"><strong>Requested Date: </strong>{post.selectedDate}</Typography>
+          <Typography variant="body2"><strong>@: </strong>{post.selectedDate}</Typography>
           <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
           <Divider style={{ margin: '20px 0' }} />
           <Typography variant="body1"><strong>Realtime Chat - coming soon!</strong></Typography>
           <Divider style={{ margin: '20px 0' }} />
+          {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
           <CommentSection post={post} />
+          )}
           <Divider style={{ margin: '20px 0' }} />
         </div>
         <div className={classes.imageSection}>

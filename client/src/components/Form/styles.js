@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
     borderRadius: 15,
     borderColor: 'red',
     borderStyle: 'solid',
-    backgroundColor: 'gray',
+    backgroundColor: 'rgba(128, 128, 128, 0.648)',
   },
   themedText: {
     borderRadius: '5px',

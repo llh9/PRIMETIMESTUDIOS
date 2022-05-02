@@ -13,6 +13,11 @@ const postSchema = mongoose.Schema({
         type: Date,
         default: new Date(),
     },
+    selectedDate: {
+        type: Date,
+        required: false,
+        default: '',
+    },
 })
 
 var PostMessage = mongoose.model('PostMessage', postSchema);

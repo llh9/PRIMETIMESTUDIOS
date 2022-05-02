@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 
-import { likePost, deletePost } from '../../../actions/posts';
+import { likePost, deletePost, getPost } from '../../../actions/posts';
 import useStyles from './styles';
 
 const Post = ({ post, setCurrentId }) => {
@@ -45,10 +45,12 @@ const Post = ({ post, setCurrentId }) => {
   };
 
   const openPost = (e) => {
-    // dispatch(getPost(post._id, history));
+    dispatch(getPost(post._id, history));
 
     history.push(`/posts/${post._id}`);
   };
+
+
 
   return (
     <Card className={classes.card} raised elevation={6}>
@@ -65,6 +67,8 @@ const Post = ({ post, setCurrentId }) => {
         </div>
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
         <div className={classes.overlay2} name="edit">
+          <Typography variant="h6">{post.title}</Typography>
+          <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
           <Button
             onClick={(e) => {
               e.stopPropagation();
@@ -77,15 +81,15 @@ const Post = ({ post, setCurrentId }) => {
           </Button>
         </div>
         )}
-        {/* <div className={classes.details}>
-          <Typography variant="body2" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
-        </div> */}
+        <div className={classes.details}>
+          <Typography variant="body2" color="white" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
+        </div>
         <Typography className={classes.title} gutterBottom variant="h5" component="h2">{post.title}</Typography>
         <CardContent>
-          {/* <Typography variant="body2" color="textSecondary" component="p">{post.message.split(' ').splice(0, 20).join(' ')}...</Typography> */}
+          <Typography variant="body2" color="white" component="p">{post.message.split(' ').splice(0, 20).join(' ')}...</Typography>
         </CardContent>
       </ButtonBase>
-      {/* <CardActions className={classes.cardActions}>
+      <CardActions className={classes.cardActions}>
         <Button className={classes.likes} size="small" color="primary" disabled={!user?.result} onClick={handleLike}>
           <Likes />
         </Button>
@@ -94,7 +98,7 @@ const Post = ({ post, setCurrentId }) => {
             <DeleteIcon fontSize="small" /> &nbsp; Delete
           </Button>
         )}
-      </CardActions> */}
+      </CardActions>
     </Card>
   );
 };

@@ -27,4 +27,13 @@ export default makeStyles((theme) => ({
       flexDirection: 'column-reverse',
     },
   },
+  paper: {
+    display: 'flex',
+    flexShrink: "true", 
+    borderRadius: 15,
+    borderColor: 'red',
+    borderStyle: 'solid',
+    backgroundColor: 'transparent'
+  }
+  
 }));
